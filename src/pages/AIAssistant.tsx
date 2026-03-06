@@ -4,7 +4,7 @@ import { Send, Bot, User, Loader2, Scale, AlertCircle, Trash2 } from 'lucide-rea
 import ReactMarkdown from 'react-markdown';
 
 // ── Vite env variable ──
-const GEMINI_API_KEY = 'AIzaSyANuXs_tUe8ZnW7k2E8JEFwEWF-AFxou5o';
+const GEMINI_API_KEY = 'AIzaSyBxeGyDCRkYWP951VD6jKguAC0L2bYLI1c';
 
 // ── System instruction (updated per requirements) ──
 const SYSTEM_PROMPT = `You are LexBridge AI, a legal assistant specialized in Egyptian law.
@@ -73,7 +73,7 @@ export default function AIAssistant() {
       };
 
       const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${GEMINI_API_KEY}`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
