@@ -4,7 +4,7 @@ import { Send, Bot, User, Loader2, Scale, AlertCircle, Trash2 } from 'lucide-rea
 import ReactMarkdown from 'react-markdown';
 
 // ── Vite env variable ──
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
+const GEMINI_API_KEY = 'AIzaSyANuXs_tUe8ZnW7k2E8JEFwEWF-AFxou5o';
 
 // ── System instruction (updated per requirements) ──
 const SYSTEM_PROMPT = `You are LexBridge AI, a legal assistant specialized in Egyptian law.
@@ -45,7 +45,7 @@ export default function AIAssistant() {
     if (!GEMINI_API_KEY) {
       setMessages(prev => [...prev,
         { role: 'user', content: text },
-        { role: 'assistant', content: 'عذراً، لم يتم إعداد مفتاح API. يرجى إضافة `VITE_GEMINI_API_KEY` في ملف `.env.local`' },
+        { role: 'assistant', content: '⚠️ مفتاح API غير موجود — تأكد من إضافة VITE_GEMINI_API_KEY في Netlify ثم أعد الـ deploy' },
       ]);
       setInput('');
       return;
@@ -87,9 +87,10 @@ export default function AIAssistant() {
       const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text ?? 'الخدمة حالياً غير متوفرة';
 
       setMessages(prev => [...prev, { role: 'assistant', content: reply }]);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Gemini error:', err);
-      setMessages(prev => [...prev, { role: 'assistant', content: 'الخدمة حالياً غير متوفرة' }]);
+      const errMsg = err?.message ? `خطأ: ${err.message}` : 'الخدمة حالياً غير متوفرة';
+      setMessages(prev => [...prev, { role: 'assistant', content: errMsg }]);
     } finally {
       setIsLoading(false);
       setTimeout(() => inputRef.current?.focus(), 100);
