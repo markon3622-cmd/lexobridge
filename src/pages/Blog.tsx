@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, Fragment } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Search, Calendar, User, ArrowLeft, Lock } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -65,6 +65,7 @@ export default function Blog() {
     .sort((a, b) => parseDate(b.date) - parseDate(a.date));
 
   return (
+    <Fragment>
     <div style={{ paddingTop: '8rem', paddingBottom: '6rem', background: 'transparent', minHeight: '100vh', position: 'relative', zIndex: 1 }}>
       <div className="max-w-7xl mx-auto px-6">
 
@@ -236,6 +237,6 @@ export default function Blog() {
             onRefresh={handleRefresh} />
         )}
       </AnimatePresence>
-    </div>
+    </Fragment>
   );
 }

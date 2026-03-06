@@ -4,42 +4,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Calendar, User, ArrowRight, Share2, Bookmark, Trash2, Lock, Paperclip } from 'lucide-react';
 import { getPostById, deletePost, DASHBOARD_PASSWORD, CAT_MAP } from '../lib/blogStore';
 
-// ── Static content for original posts ──
-const STATIC_CONTENT: Record<number, string> = {
-  1: `
-    <p>شهدت المنظومة الجنائية في مصر تحولات جذرية ومفصلية خلال العامين الأخيرين (2024-2025)، تُوجت بصدور قانون الإجراءات الجنائية الجديد رقم 174 لسنة 2025، والذي يُعد التغيير الأضخم منذ عام 1950.</p>
-    <h2 class="text-2xl font-bold mt-8 mb-4 text-silver-gradient">ثورة في العدالة: ملامح التعديلات الجنائية الجديدة في مصر</h2>
-    <p>تأتي التعديلات الأخيرة لتعالج ملفات شائكة طالما كانت محل نقاش حقوقي وقانوني، وعلى رأسها قضية الحبس الاحتياطي وحقوق الدفاع.</p>
-    <h3 class="text-xl font-bold mt-8 mb-4 text-silver-300">1. تقليص الحبس الاحتياطي واستحداث بدائل</h3>
-    <ul class="list-disc list-inside space-y-2 my-4" style="color:rgba(192,192,192,0.7)">
-      <li><strong>زيادة البدائل:</strong> ارتفع عدد بدائل الحبس الاحتياطي من 3 إلى 7 بدائل.</li>
-      <li><strong>تحديد المدد:</strong> وضع القانون سقفاً زمنياً صارماً للحبس الاحتياطي لا يجوز تجاوزها.</li>
-    </ul>
-    <h3 class="text-xl font-bold mt-8 mb-4 text-silver-300">2. إقرار نظام "استئناف الجنايات"</h3>
-    <p>بموجب القانون رقم 1 لسنة 2024، أصبح التقاضي في الجنايات على درجتين مما يعزز ضمانات العدالة.</p>
-    <h3 class="text-xl font-bold mt-8 mb-4 text-silver-300">3. تعزيز حقوق الدفاع وحرمة المنازل</h3>
-    <ul class="list-disc list-inside space-y-2 my-4" style="color:rgba(192,192,192,0.7)">
-      <li><strong>حضور المحامي:</strong> أوجب القانون حضور محامٍ مع المتهم في جميع مراحل التحقيق.</li>
-      <li><strong>حرمة المسكن:</strong> وضع ضوابط أكثر صرامة لدخول المنازل بأمر قضائي مسبب.</li>
-    </ul>
-    <h2 class="text-2xl font-bold mt-8 mb-4 text-silver-300">ختاماً</h2>
-    <p>تمثل هذه التعديلات نقلة نوعية تهدف إلى الموازنة بين حق الدولة في العقاب وحق المواطن في الحرية والكرامة.</p>
-  `,
-  2: `
-    <p>في عالم الجريمة، غالباً ما تبرر الغاية الوسيلة لدى الجاني، لكن في عالم القضاء، الوسيلة هي التي تمنح الغاية شرعيتها.</p>
-    <h2 class="text-2xl font-bold mt-8 mb-4 text-silver-gradient">لا دليل بلا مشروعية: السياج الأخلاقي والقانوني للعدالة الجنائية</h2>
-    <h3 class="text-xl font-bold mt-8 mb-4 text-silver-300">1. مفهوم مشروعية الدليل الجنائي</h3>
-    <p>يقصد بمشروعية الدليل وجوب أن يكون الدليل المستمد ضد المتهم قد تم الحصول عليه بطرق تتفق مع الدستور والقانون.</p>
-    <h3 class="text-xl font-bold mt-8 mb-4 text-silver-300">2. القاعدة الذهبية: "ما بُني على باطل فهو باطل"</h3>
-    <ul class="list-disc list-inside space-y-2 my-4" style="color:rgba(192,192,192,0.7)">
-      <li><strong>بطلان الدليل الأصلي:</strong> إذا قام ضابط بتفتيش مسكن دون إذن قضائي فإن الضبط باطل.</li>
-      <li><strong>بطلان الدليل المُستمد:</strong> الاعتراف الناتج عن إجراء باطل يُعد "ثمرة لشجرة مسمومة".</li>
-    </ul>
-    <h2 class="text-2xl font-bold mt-8 mb-4 text-silver-300">خلاصة القول</h2>
-    <p>إن مبدأ "لا دليل بلا مشروعية" ليس ثغرة قانونية بل هو صمام أمان يضمن أن تظل العدالة ناصعة ومحترمة.</p>
-  `,
-};
-
 const GLASS: React.CSSProperties = {
   background: 'rgba(2,8,20,0.85)',
   backdropFilter: 'blur(28px)',
@@ -67,8 +31,7 @@ export default function BlogPost() {
   }
 
   // Use static content for original posts, dynamic content for new ones
-  const content = STATIC_CONTENT[post.id] ?? post.content;
-  const isStatic = post.id <= 4;
+  const content = post.content;
 
   const handleDelete = () => {
     if (delPw !== DASHBOARD_PASSWORD) { setDelErr('كلمة المرور غير صحيحة'); return; }
@@ -123,13 +86,11 @@ export default function BlogPost() {
                 <Bookmark size={16} /> حفظ
               </button>
             </div>
-            {/* Delete — hidden for static */}
-            {!isStatic && (
-              <button onClick={() => { setShowDelModal(true); setDelPw(''); setDelErr(''); }}
+            {/* Delete */}
+            <button onClick={() => { setShowDelModal(true); setDelPw(''); setDelErr(''); }}
                 style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: 'rgba(248,113,113,0.55)', fontSize: '0.75rem', background: 'rgba(248,113,113,0.05)', border: '1px solid rgba(248,113,113,0.15)', borderRadius: '0.5rem', padding: '0.35rem 0.75rem', cursor: 'pointer', fontFamily: 'inherit' }}>
                 <Trash2 size={13} /> حذف المقال
               </button>
-            )}
           </div>
 
           {/* Attachment */}

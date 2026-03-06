@@ -433,7 +433,7 @@ function ToolCard({ icon, title, badge, children, index = 0 }: { icon: React.Rea
       viewport={{ once: true, margin: '-40px' }}
       transition={{ delay: index * 0.07, ease: [0.22, 1, 0.36, 1], duration: 0.5 }}
       whileHover={!open ? { y: -5, scale: 1.01 } : {}}
-      className={cn('glass border-silver-300/20 overflow-hidden', open && 'shadow-lg shadow-silver-300/5')}
+      className={cn('glass glass-hover card-shine border-silver-300/20 overflow-hidden', open && 'shadow-lg shadow-silver-300/5')}
       style={{ transition: 'box-shadow 0.3s, border-color 0.3s', cursor: 'pointer' }}
     >
       <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between p-6 text-right">

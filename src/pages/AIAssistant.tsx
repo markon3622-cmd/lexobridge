@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Send, Bot, User, Loader2, Scale, AlertCircle, Trash2 } from 'lucide-react';
+import { Send, Bot, User, Loader2, Scale, AlertCircle, Trash2, ArrowLeft } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import { Link } from 'react-router-dom';
 
 // ── Vite env variable ──
 const GEMINI_API_KEY = 'AIzaSyBxeGyDCRkYWP951VD6jKguAC0L2bYLI1c';
@@ -26,12 +27,16 @@ export default function AIAssistant() {
   const [messages, setMessages] = useState<Message[]>([WELCOME]);
   const [input, setInput]       = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef       = useRef<HTMLInputElement>(null);
+  const messagesEndRef    = useRef<HTMLDivElement>(null);
+  const messagesBoxRef    = useRef<HTMLDivElement>(null);
+  const inputRef          = useRef<HTMLInputElement>(null);
 
-  // Auto-scroll
+  // Auto-scroll — only inside the chat box, never moves the page
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const box = messagesBoxRef.current;
+    if (box) {
+      box.scrollTop = box.scrollHeight;
+    }
   }, [messages, isLoading]);
 
   // Focus input on mount
@@ -165,7 +170,7 @@ export default function AIAssistant() {
           </div>
 
           {/* Messages area */}
-          <div style={{ flex: 1, overflowY: 'auto', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem',
+          <div ref={messagesBoxRef} style={{ flex: 1, overflowY: 'auto', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem',
             scrollbarWidth: 'thin', scrollbarColor: 'rgba(192,192,192,0.1) transparent' }}>
             {messages.map((msg, i) => (
               <motion.div key={i}
@@ -253,7 +258,7 @@ export default function AIAssistant() {
                 type="text"
                 value={input}
                 onChange={e => setInput(e.target.value)}
-                onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); } }}
+                onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); e.stopPropagation(); handleSend(); } }}
                 placeholder="اسأل المحامي الذكي عن أي مسألة قانونية..."
                 disabled={isLoading}
                 style={{
@@ -318,7 +323,7 @@ export default function AIAssistant() {
         <motion.div
           initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, ease: [0.22,1,0.36,1] }}
           style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center' }}>
-          <a href="/contact"
+          <Link to="/contact"
             style={{
               display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
               gap: '0.6rem', padding: '0.75rem 2.25rem',
@@ -343,15 +348,8 @@ export default function AIAssistant() {
               el.style.transform = 'translateY(0)';
             }}
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-              strokeLinecap="round" strokeLinejoin="round" style={{ width: '16px', height: '16px', flexShrink: 0 }}>
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-              <line x1="16" y1="2" x2="16" y2="6" />
-              <line x1="8" y1="2" x2="8" y2="6" />
-              <line x1="3" y1="10" x2="21" y2="10" />
-            </svg>
-            احجز استشارة الآن
-          </a>
+            احجز استشارة الآن <ArrowLeft size={16} />
+          </Link>
         </motion.div>
 
       {/* Bounce animation */}
