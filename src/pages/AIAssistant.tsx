@@ -314,86 +314,50 @@ export default function AIAssistant() {
         </motion.div>
       </div>
 
-      {/* Book consultation CTA */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
+      {/* Book consultation CTA — silver style */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, ease: [0.22,1,0.36,1] }}
           style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center' }}>
           <a href="/contact"
             style={{
               display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-              gap: '0.6rem', padding: '0.8rem 2rem',
-              borderRadius: '0.875rem', textDecoration: 'none',
-              fontWeight: 700, fontSize: '0.9rem', fontFamily: 'inherit',
-              background: 'rgba(0, 18, 45, 0.6)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              border: '1px solid rgba(0, 90, 180, 0.4)',
-              color: 'rgba(180, 220, 255, 0.9)',
-              boxShadow: '0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05)',
+              gap: '0.6rem', padding: '0.75rem 2.25rem',
+              borderRadius: '999px', textDecoration: 'none',
+              fontWeight: 700, fontSize: '0.875rem', fontFamily: 'inherit',
+              background: 'linear-gradient(135deg, rgba(220,224,230,0.15), rgba(192,192,192,0.08))',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              border: '1px solid rgba(192,192,192,0.35)',
+              color: 'rgba(220,224,230,0.9)',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07)',
               transition: 'all 0.25s cubic-bezier(0.4,0,0.2,1)',
+              position: 'relative', overflow: 'hidden',
             }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = 'rgba(0, 35, 80, 0.75)';
-              el.style.borderColor = 'rgba(0, 120, 230, 0.6)';
-              el.style.boxShadow = '0 8px 32px rgba(0,50,150,0.4), 0 0 0 1px rgba(0,100,200,0.2)';
+              el.style.background = 'linear-gradient(135deg, rgba(240,242,245,0.22), rgba(192,192,192,0.14))';
+              el.style.borderColor = 'rgba(220,224,230,0.55)';
+              el.style.boxShadow = '0 8px 28px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.1)';
               el.style.transform = 'translateY(-2px)';
-              el.style.color = 'rgba(210, 235, 255, 1)';
+              el.style.color = '#F0F2F5';
             }}
             onMouseLeave={e => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = 'rgba(0, 18, 45, 0.6)';
-              el.style.borderColor = 'rgba(0, 90, 180, 0.4)';
-              el.style.boxShadow = '0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05)';
+              el.style.background = 'linear-gradient(135deg, rgba(220,224,230,0.15), rgba(192,192,192,0.08))';
+              el.style.borderColor = 'rgba(192,192,192,0.35)';
+              el.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07)';
               el.style.transform = 'translateY(0)';
-              el.style.color = 'rgba(180, 220, 255, 0.9)';
+              el.style.color = 'rgba(220,224,230,0.9)';
             }}
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-              strokeLinecap="round" strokeLinejoin="round" style={{ width: '17px', height: '17px', flexShrink: 0 }}>
+              strokeLinecap="round" strokeLinejoin="round" style={{ width: '16px', height: '16px', flexShrink: 0 }}>
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
               <line x1="16" y1="2" x2="16" y2="6" />
               <line x1="8" y1="2" x2="8" y2="6" />
               <line x1="3" y1="10" x2="21" y2="10" />
             </svg>
             احجز استشارة الآن
-          </a>
-        </motion.div>
-
-        {/* Instagram link */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
-          style={{ marginTop: '0.75rem', display: 'flex', justifyContent: 'center' }}>
-          <a href="https://www.instagram.com/lexbridge_/" target="_blank" rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.45rem',
-              padding: '0.5rem 1.1rem', borderRadius: '999px', textDecoration: 'none',
-              fontSize: '0.78rem', fontWeight: 600, fontFamily: 'inherit',
-              background: 'rgba(0, 15, 40, 0.5)',
-              border: '1px solid rgba(80, 160, 255, 0.2)',
-              color: 'rgba(147, 197, 253, 0.7)',
-              transition: 'all 0.2s',
-            }}
-            onMouseEnter={e => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.background = 'rgba(0, 35, 80, 0.65)';
-              el.style.borderColor = 'rgba(100, 180, 255, 0.45)';
-              el.style.color = '#bfdbfe';
-              el.style.transform = 'translateY(-1px)';
-            }}
-            onMouseLeave={e => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.background = 'rgba(0, 15, 40, 0.5)';
-              el.style.borderColor = 'rgba(80, 160, 255, 0.2)';
-              el.style.color = 'rgba(147, 197, 253, 0.7)';
-              el.style.transform = 'translateY(0)';
-            }}
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"
-              strokeLinecap="round" strokeLinejoin="round" style={{ width: '15px', height: '15px', flexShrink: 0 }}>
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none" />
-            </svg>
-            تابعنا على انستاجرام
           </a>
         </motion.div>
 

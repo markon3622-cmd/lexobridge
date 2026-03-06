@@ -160,7 +160,7 @@ export default function BlogPost() {
               style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', zIndex: 201, width: '90vw', maxWidth: '360px', ...GLASS, padding: '1.75rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
                 <Lock size={16} style={{ color: '#f87171' }} />
-                <h3 style={{ fontWeight: 800, fontSize: '0.95rem', color: '#F8F9FA' }}>تأكيد حذف المقال</h3>
+                <h3 style={{ fontWeight: 800, fontSize: '0.95rem', color: '#F8F9FA' }}>🔒 مغلق</h3>
               </div>
               <p style={{ fontSize: '0.8rem', color: 'rgba(192,192,192,0.5)', marginBottom: '1rem' }}>أدخل كلمة المرور لتأكيد الحذف — لا يمكن التراجع</p>
               <input type="password" placeholder="كلمة المرور..." value={delPw}

@@ -332,7 +332,7 @@ export default function BlogDashboard({ onClose, onRefresh }: Props) {
               style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', zIndex: 301, width: '90vw', maxWidth: '360px', ...GLASS, padding: '1.75rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
                 <Lock size={18} style={{ color: '#f87171' }} />
-                <h3 style={{ fontWeight: 800, fontSize: '1rem', color: '#F8F9FA' }}>تأكيد الحذف</h3>
+                <h3 style={{ fontWeight: 800, fontSize: '1rem', color: '#F8F9FA' }}>🔒 مغلق</h3>
               </div>
               <p style={{ fontSize: '0.82rem', color: 'rgba(192,192,192,0.55)', marginBottom: '1rem' }}>أدخل كلمة المرور لتأكيد حذف المقال</p>
               <input type="password" placeholder="كلمة المرور" value={delPw}

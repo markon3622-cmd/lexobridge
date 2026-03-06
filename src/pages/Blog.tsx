@@ -49,11 +49,20 @@ export default function Blog() {
     }
   };
 
-  const filteredPosts = posts.filter(p => {
-    const ms = p.title.includes(searchQuery) || p.excerpt.includes(searchQuery);
-    const mc = selectedCategory === 'الكل' || p.category === selectedCategory;
-    return ms && mc;
-  });
+  const parseDate = (d: string) => {
+    // formats: dd/mm/yyyy or yyyy-mm-dd
+    if (d.includes('-')) return new Date(d).getTime();
+    const [day, month, year] = d.split('/');
+    return new Date(Number(year), Number(month)-1, Number(day)).getTime();
+  };
+
+  const filteredPosts = posts
+    .filter(p => {
+      const ms = p.title.includes(searchQuery) || p.excerpt.includes(searchQuery);
+      const mc = selectedCategory === 'الكل' || p.category === selectedCategory;
+      return ms && mc;
+    })
+    .sort((a, b) => parseDate(b.date) - parseDate(a.date));
 
   return (
     <div style={{ paddingTop: '8rem', paddingBottom: '6rem', background: 'transparent', minHeight: '100vh', position: 'relative', zIndex: 1 }}>
@@ -91,9 +100,9 @@ export default function Blog() {
                     position: 'relative', padding: '0.55rem 1.35rem', borderRadius: '999px',
                     fontSize: '0.82rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit',
                     transition: 'all 0.25s',
-                    border: active ? '1px solid rgba(192,192,192,0.5)' : '1px solid rgba(192,192,192,0.18)',
-                    background: active ? 'linear-gradient(135deg,rgba(220,224,230,0.18),rgba(192,192,192,0.12))' : 'rgba(255,255,255,0.03)',
-                    color: active ? '#E8EAED' : 'rgba(192,192,192,0.55)',
+                    border: active ? '1px solid rgba(220,224,230,0.6)' : '1px solid rgba(192,192,192,0.35)',
+                    background: active ? 'linear-gradient(135deg,rgba(240,242,245,0.2),rgba(192,192,192,0.15))' : 'rgba(192,192,192,0.06)',
+                    color: active ? '#F0F2F5' : 'rgba(200,205,214,0.8)',
                     backdropFilter: 'blur(12px)',
                     boxShadow: active ? '0 0 0 1px rgba(192,192,192,0.1),0 4px 16px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.08)' : '0 2px 8px rgba(0,0,0,0.2)',
                     overflow: 'hidden',
@@ -118,8 +127,9 @@ export default function Blog() {
                 exit={{ opacity: 0, y: -10, scale: 0.96 }}
                 transition={{ delay: i * 0.07 }}
                 className="glass card-shine"
-                style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column', cursor: 'pointer' }}
-                whileHover={{ y: -6 }}>
+                style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column', cursor: 'pointer', textDecoration: 'none' }}
+                whileHover={{ y: -6 }}
+                onClick={() => window.location.href = `/blog/${post.id}`}>
                 <div style={{ position: 'relative', aspectRatio: '16/9', overflow: 'hidden' }}>
                   <img src={post.image} alt={post.title}
                     referrerPolicy="no-referrer"
@@ -195,7 +205,7 @@ export default function Blog() {
                   <Lock size={14} style={{ color: '#93c5fd' }} />
                 </div>
                 <div>
-                  <h3 style={{ fontWeight: 800, fontSize: '0.95rem', color: '#F8F9FA' }}>لوحة التحكم</h3>
+                  <h3 style={{ fontWeight: 800, fontSize: '0.95rem', color: '#F8F9FA' }}>🔒 مغلق</h3>
                   <p style={{ fontSize: '0.7rem', color: 'rgba(192,192,192,0.4)' }}>أدخل كلمة المرور للمتابعة</p>
                 </div>
               </div>

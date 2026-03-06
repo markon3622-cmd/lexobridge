@@ -424,30 +424,47 @@ function LawsuitDraft() {
 }
 
 // Collapsible card
-function ToolCard({ icon, title, badge, children }: { icon: React.ReactNode; title: string; badge?: string; children: React.ReactNode }) {
+function ToolCard({ icon, title, badge, children, index = 0 }: { icon: React.ReactNode; title: string; badge?: string; children: React.ReactNode; index?: number }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className={cn('glass border-silver-300/20 overflow-hidden transition-all duration-300', open && 'shadow-lg shadow-silver-300/5')}>
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ delay: index * 0.07, ease: [0.22, 1, 0.36, 1], duration: 0.5 }}
+      whileHover={!open ? { y: -3, boxShadow: '0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(192,192,192,0.12)' } : {}}
+      className={cn('glass border-silver-300/20 overflow-hidden', open && 'shadow-lg shadow-silver-300/5')}
+      style={{ transition: 'box-shadow 0.3s' }}
+    >
       <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between p-6 text-right">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-silver-300/10 rounded-xl flex items-center justify-center text-silver-300 shrink-0">{icon}</div>
+          <motion.div
+            animate={{ scale: open ? 1.1 : 1, background: open ? 'rgba(192,192,192,0.18)' : 'rgba(192,192,192,0.08)' }}
+            transition={{ duration: 0.25 }}
+            className="w-12 h-12 rounded-xl flex items-center justify-center text-silver-300 shrink-0"
+          >{icon}</motion.div>
           <div className="text-right">
             <h3 className="text-base font-bold text-white">{title}</h3>
             {badge && <span className="text-xs text-silver-400">{badge}</span>}
           </div>
         </div>
-        <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
+        <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}>
           <ChevronDown size={20} className="text-silver-400" />
         </motion.div>
       </button>
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }}>
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          >
             <div className="px-6 pb-6 border-t border-white/5 pt-6">{children}</div>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 
@@ -476,26 +493,26 @@ export default function LegalTools() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mb-10">
           <SectionHeader icon={<Users size={20} />} title="أحوال شخصية" subtitle="حسابات قانون الأسرة والأحوال الشخصية" />
           <div className="space-y-4">
-            <ToolCard icon={<Calculator size={22} />} title="حاسبة النفقة الشرعية" badge="يحتسب بناءً على قضاء محكمة الأسرة"><NafaqaCalc /></ToolCard>
-            <ToolCard icon={<TrendingUp size={22} />} title="حاسبة متجمد النفقة" badge="احسب المبالغ المتراكمة غير المدفوعة"><ArrearsCalc /></ToolCard>
-            <ToolCard icon={<Scale size={22} />} title="حاسبة مؤخر الصداق" badge="تقدير القيمة الحقيقية بعد التضخم"><MahrCalc /></ToolCard>
+            <ToolCard index={0} icon={<Calculator size={22} />} title="حاسبة النفقة الشرعية" badge="يحتسب بناءً على قضاء محكمة الأسرة"><NafaqaCalc /></ToolCard>
+            <ToolCard index={1} icon={<TrendingUp size={22} />} title="حاسبة متجمد النفقة" badge="احسب المبالغ المتراكمة غير المدفوعة"><ArrearsCalc /></ToolCard>
+            <ToolCard index={2} icon={<Scale size={22} />} title="حاسبة مؤخر الصداق" badge="تقدير القيمة الحقيقية بعد التضخم"><MahrCalc /></ToolCard>
           </div>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mb-10">
           <SectionHeader icon={<Building size={20} />} title="مدني وتجاري" subtitle="أدوات القانون المدني والتجاري وقانون العمل" />
           <div className="space-y-4">
-            <ToolCard icon={<Clock size={22} />} title="حاسبة التقادم القانوني" badge="هل سقط حقك بالتقادم؟"><PrescriptionCalc /></ToolCard>
-            <ToolCard icon={<Gavel size={22} />} title="حاسبة تعويض الفصل التعسفي" badge="تقدير تعويض إنهاء الخدمة"><DismissalCalc /></ToolCard>
-            <ToolCard icon={<HelpCircle size={22} />} title="هل قضيتك قابلة للكسب؟" badge="قيّم قوة موقفك القانوني"><CaseStrength /></ToolCard>
+            <ToolCard index={3} icon={<Clock size={22} />} title="حاسبة التقادم القانوني" badge="هل سقط حقك بالتقادم؟"><PrescriptionCalc /></ToolCard>
+            <ToolCard index={4} icon={<Gavel size={22} />} title="حاسبة تعويض الفصل التعسفي" badge="تقدير تعويض إنهاء الخدمة"><DismissalCalc /></ToolCard>
+            <ToolCard index={5} icon={<HelpCircle size={22} />} title="هل قضيتك قابلة للكسب؟" badge="قيّم قوة موقفك القانوني"><CaseStrength /></ToolCard>
           </div>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="mb-16">
           <SectionHeader icon={<FileText size={20} />} title="خدمات سريعة" subtitle="إنشاء مستندات قانونية جاهزة للاسترشاد" />
           <div className="space-y-4">
-            <ToolCard icon={<FileText size={22} />} title="مولد الإنذار القانوني" badge="أنشئ إنذاراً قانونياً رسمياً"><LegalNoticeGen /></ToolCard>
-            <ToolCard icon={<Scale size={22} />} title="صيغة صحيفة دعوى مبدئية" badge="مسودة أولية لصحيفة الدعوى"><LawsuitDraft /></ToolCard>
+            <ToolCard index={6} icon={<FileText size={22} />} title="مولد الإنذار القانوني" badge="أنشئ إنذاراً قانونياً رسمياً"><LegalNoticeGen /></ToolCard>
+            <ToolCard index={7} icon={<Scale size={22} />} title="صيغة صحيفة دعوى مبدئية" badge="مسودة أولية لصحيفة الدعوى"><LawsuitDraft /></ToolCard>
           </div>
         </motion.div>
 
