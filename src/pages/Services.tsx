@@ -158,12 +158,12 @@ export default function Services() {
               exit={{ opacity: 0, y: 20, scale: 0.96 }}
               transition={{ ease: [0.16, 1, 0.3, 1], duration: 0.4 }}
               style={{
-                position: 'fixed', top: '50%', left: '50%',
-                transform: 'translate(-50%, -50%)',
-                zIndex: 101, width: '90vw', maxWidth: '480px',
-                maxHeight: '90vh', overflowY: 'auto',
+                position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                zIndex: 101, padding: '1rem',
               }}
             >
+              <div style={{ width: '100%', maxWidth: '480px', maxHeight: '90vh', overflowY: 'auto' }}>
               <div className="glass" style={{ padding: '2rem', border: '1px solid rgba(0,80,160,0.35)', boxShadow: '0 0 60px rgba(0,40,100,0.3), 0 24px 80px rgba(0,0,0,0.7)' }}>
                 {/* Header */}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
@@ -227,6 +227,7 @@ export default function Services() {
                     )}
                   </button>
                 </form>
+              </div>
               </div>
             </motion.div>
           </>
