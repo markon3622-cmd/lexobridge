@@ -432,16 +432,18 @@ function ToolCard({ icon, title, badge, children, index = 0 }: { icon: React.Rea
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ delay: index * 0.07, ease: [0.22, 1, 0.36, 1], duration: 0.5 }}
-      whileHover={!open ? { y: -3, boxShadow: '0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(192,192,192,0.12)' } : {}}
+      whileHover={!open ? { y: -5, scale: 1.01 } : {}}
       className={cn('glass border-silver-300/20 overflow-hidden', open && 'shadow-lg shadow-silver-300/5')}
-      style={{ transition: 'box-shadow 0.3s' }}
+      style={{ transition: 'box-shadow 0.3s, border-color 0.3s', cursor: 'pointer' }}
     >
       <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between p-6 text-right">
         <div className="flex items-center gap-4">
           <motion.div
             animate={{ scale: open ? 1.1 : 1, background: open ? 'rgba(192,192,192,0.18)' : 'rgba(192,192,192,0.08)' }}
-            transition={{ duration: 0.25 }}
+            whileHover={{ scale: 1.08, background: 'rgba(192,192,192,0.16)' }}
+            transition={{ duration: 0.2 }}
             className="w-12 h-12 rounded-xl flex items-center justify-center text-silver-300 shrink-0"
+            style={{ boxShadow: '0 0 0 0 rgba(192,192,192,0)', transition: 'box-shadow 0.3s' }}
           >{icon}</motion.div>
           <div className="text-right">
             <h3 className="text-base font-bold text-white">{title}</h3>

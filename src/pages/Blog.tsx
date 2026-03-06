@@ -100,16 +100,14 @@ export default function Blog() {
                     position: 'relative', padding: '0.55rem 1.35rem', borderRadius: '999px',
                     fontSize: '0.82rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit',
                     transition: 'all 0.25s',
-                    border: active ? '1px solid rgba(220,224,230,0.6)' : '1px solid rgba(192,192,192,0.35)',
-                    background: active ? 'linear-gradient(135deg,rgba(240,242,245,0.2),rgba(192,192,192,0.15))' : 'rgba(192,192,192,0.06)',
-                    color: active ? '#F0F2F5' : 'rgba(200,205,214,0.8)',
+                    border: '1px solid rgba(192,192,192,0.4)',
+                    background: active ? 'linear-gradient(135deg,#C8CDD6,#C0C0C0)' : 'rgba(192,192,192,0.08)',
+                    color: active ? '#001F3F' : 'rgba(200,205,214,0.85)',
                     backdropFilter: 'blur(12px)',
                     boxShadow: active ? '0 0 0 1px rgba(192,192,192,0.1),0 4px 16px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.08)' : '0 2px 8px rgba(0,0,0,0.2)',
                     overflow: 'hidden',
                   }}>
-                  {active && (
-                    <motion.span layoutId="pill-shimmer" style={{ position: 'absolute', top: 0, left: '15%', right: '15%', height: '1px', background: 'linear-gradient(90deg,transparent,rgba(192,192,192,0.7),transparent)', borderRadius: '999px' }} />
-                  )}
+
                   {CAT_LABELS[cat]}
                 </motion.button>
               );

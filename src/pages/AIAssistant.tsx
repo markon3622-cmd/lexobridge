@@ -324,30 +324,23 @@ export default function AIAssistant() {
               gap: '0.6rem', padding: '0.75rem 2.25rem',
               borderRadius: '999px', textDecoration: 'none',
               fontWeight: 700, fontSize: '0.875rem', fontFamily: 'inherit',
-              background: 'linear-gradient(135deg, rgba(220,224,230,0.15), rgba(192,192,192,0.08))',
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
-              border: '1px solid rgba(192,192,192,0.35)',
-              color: 'rgba(220,224,230,0.9)',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07)',
+              background: 'linear-gradient(135deg, #C8CDD6, #C0C0C0)',
+              border: '1px solid rgba(192,192,192,0.3)',
+              color: '#001F3F',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
               transition: 'all 0.25s cubic-bezier(0.4,0,0.2,1)',
-              position: 'relative', overflow: 'hidden',
             }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = 'linear-gradient(135deg, rgba(240,242,245,0.22), rgba(192,192,192,0.14))';
-              el.style.borderColor = 'rgba(220,224,230,0.55)';
-              el.style.boxShadow = '0 8px 28px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.1)';
+              el.style.background = 'linear-gradient(135deg, #D8DCE4, #C8C8C8)';
+              el.style.boxShadow = '0 8px 28px rgba(0,0,0,0.35)';
               el.style.transform = 'translateY(-2px)';
-              el.style.color = '#F0F2F5';
             }}
             onMouseLeave={e => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = 'linear-gradient(135deg, rgba(220,224,230,0.15), rgba(192,192,192,0.08))';
-              el.style.borderColor = 'rgba(192,192,192,0.35)';
-              el.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07)';
+              el.style.background = 'linear-gradient(135deg, #C8CDD6, #C0C0C0)';
+              el.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
               el.style.transform = 'translateY(0)';
-              el.style.color = 'rgba(220,224,230,0.9)';
             }}
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
