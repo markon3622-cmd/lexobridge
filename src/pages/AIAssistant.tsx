@@ -65,10 +65,8 @@ export default function AIAssistant() {
         }));
 
       const body = {
-        system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
         contents: [
-          ...history,
-          { role: 'user', parts: [{ text }] },
+          { role: 'user', parts: [{ text: SYSTEM_PROMPT + '\n\nسؤال المستخدم: ' + (history.length ? history.map((m: any) => m.role + ': ' + m.parts[0].text).join('\n') + '\n' : '') + text }] },
         ],
       };
 
